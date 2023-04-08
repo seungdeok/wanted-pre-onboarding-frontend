@@ -1,4 +1,5 @@
 import { signupApi } from "configs/api/auth";
+import useAuth from "hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -43,6 +44,8 @@ const SignUpPage = () => {
     alert('정상 가입되었습니다');
     navigate('/signin');
   };
+
+  useAuth();
 
   return (
     <div>

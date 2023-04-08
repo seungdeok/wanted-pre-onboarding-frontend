@@ -1,4 +1,5 @@
 import { signinApi } from "configs/api/auth";
+import useAuth from "hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -45,6 +46,8 @@ const SignInPage = () => {
     window.localStorage.setItem('x-access-token', data['access_token']);
     navigate('/todo');
   };
+
+  useAuth();
 
   return (
     <div>
