@@ -1,3 +1,4 @@
+import { signinApi } from "configs/api/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,8 +23,26 @@ const SignInPage = () => {
     }
   }
 
-  const handleSubmit = () => {
-    // 정상 완료시 /todo 경로로 이동
+  const handleSubmit = async () => {
+    const {
+      data,
+      success,
+    } = await signinApi({
+      email,
+      password,
+    });
+
+    if (!success) {
+      // 로그인 실패
+      return alert(`로그인 실패\n${data.message ?? '잠시 후 시도해주세요'}`);
+    }
+
+    /** 정상 로그인시
+     * 1. 응답받은 JWT 토큰 로컬 스토리지에 저장
+     * 2. /todo 경로로 이동
+     */
+    alert('정상 로그인되었습니다');
+    window.localStorage.setItem('x-access-token', data['access_token']);
     navigate('/todo');
   };
 

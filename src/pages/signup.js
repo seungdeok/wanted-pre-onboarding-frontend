@@ -1,3 +1,4 @@
+import { signupApi } from "configs/api/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,8 +23,24 @@ const SignUpPage = () => {
     }
   }
 
-  const handleSubmit = () => {
-    // 정상 완료시 /signin 경로로 이동
+  const handleSubmit = async () => {
+    const {
+      data,
+      success,
+    } = await signupApi({
+      email,
+      password,
+    });
+
+    if (!success) {
+      // 회원가입 실패
+      return alert(`회원가입 실패\n${data.message ?? '잠시 후 시도해주세요'}`);
+    }
+
+    /** 정상 가입시
+     * 1. /signin 경로로 이동
+     */
+    alert('정상 가입되었습니다');
     navigate('/signin');
   };
 
