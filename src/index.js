@@ -5,7 +5,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import './stylesheets/globals.scss';
+import 'stylesheets/globals.scss';
 
 const router = createBrowserRouter([
   {
