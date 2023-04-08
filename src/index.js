@@ -5,6 +5,8 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import SignInPage from 'pages/signin';
+import SignUpPage from 'pages/signup';
 import 'stylesheets/globals.scss';
 
 const router = createBrowserRouter([
@@ -18,11 +20,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/signin",
-    element: <div>SIGN IN</div>,
+    element: <SignInPage />,
   },
   {
     path: "/signup",
-    element: <div>SIGN UP</div>,
+    element: <SignUpPage />,
   },
 ]);
 
