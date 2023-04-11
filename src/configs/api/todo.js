@@ -29,8 +29,6 @@ export const getTodosApi = async () => {
     },
   });
 
-  console.log(res);
-
   return {
     success: res.statusCode === 200,
     data: {

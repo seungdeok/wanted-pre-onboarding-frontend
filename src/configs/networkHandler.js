@@ -20,32 +20,28 @@ export const getApi = async ({ url, headers = {} }) => {
 };
 
 export const postApi = async ({ url, body, headers = {} }) => {
-  try {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        ...headers,
-      },
-      body: JSON.stringify(body),
-    };
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      ...headers,
+    },
+    body: JSON.stringify(body),
+  };
 
-    const res = await fetch(apiBaseURL + url, { ...options });
-    if (res.headers.get('content-type') &&
-      res.headers.get('content-type').indexOf('application/json') !== -1) {
-      const data = await res.json();
-      return {
-        statusCode: res.status,
-        ...data,
-      };
-    }
-
+  const res = await fetch(apiBaseURL + url, { ...options });
+  if (res.headers.get('content-type') &&
+    res.headers.get('content-type').indexOf('application/json') !== -1) {
+    const data = await res.json();
     return {
       statusCode: res.status,
-    }
-  } catch (err) {
-    console.log(err);
+      ...data,
+    };
+  }
+
+  return {
+    statusCode: res.status,
   }
 };
 

@@ -9,9 +9,6 @@ export const signupApi = async ({ email, password }) => {
     },
   });
 
-
-  console.log(res);
-
   return {
     success: res.statusCode === 201,
     data: {
