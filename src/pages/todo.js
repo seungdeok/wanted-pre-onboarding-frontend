@@ -3,8 +3,10 @@ import TodoItem from "components/todo/todoItem";
 import { createTodoApi, deleteTodoApi, getTodosApi, updateTodoApi } from "configs/api/todo";
 import useAuth from "hooks/useAuth";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TodoPage = () => {
+  const navigate = useNavigate();
   const [todo, setTodo] = useState('');
   const [targetEditingId, setTargetEditingId] = useState('');
   const [editingTodo, setEditingTodo] = useState('');
@@ -133,8 +135,8 @@ const TodoPage = () => {
     } = await getTodosApi();
 
     if (!success) {
-      // 목록 조회 실패
-      return alert(`목록 조회 실패\n${data.message ?? '잠시 후 시도해주세요'}`);
+      // 목록 조회 실패시 재로그인 요청
+      return navigate("/signin", { replace: true });
     }
     setList(data.data ?? []);
   };
