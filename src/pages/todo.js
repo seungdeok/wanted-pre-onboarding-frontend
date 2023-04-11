@@ -2,7 +2,7 @@ import Page from "components/core/page";
 import TodoItem from "components/todo/todoItem";
 import { createTodoApi, deleteTodoApi, getTodosApi, updateTodoApi } from "configs/api/todo";
 import useAuth from "hooks/useAuth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TodoPage = () => {
@@ -29,15 +29,15 @@ const TodoPage = () => {
     }
 
     setList([...list, {
-      id: list.length,
+      id: data.id,
       todo,
       isCompleted: false,
-      userId: '',
+      userId: data.userId,
     }]);
     setTodo('');
   };
 
-  const handleChangeIsCompleted = (id) => async ({ target: { checked } }) => {
+  const handleChangeIsCompleted = useCallback((id) => async ({ target: { checked } }) => {
     const index = list.findIndex(item => item.id === id);
     const newList = list.slice();
     newList[index] = {
@@ -57,20 +57,20 @@ const TodoPage = () => {
     }
 
     setList([...newList]);
-  };
+  }, [list]);
 
   const handleClickEditClear = () => {
     setEditingTodo('');
     setTargetEditingId('');
   };
 
-  const handleClickEditMode = (id) => () => {
+  const handleClickEditMode = useCallback((id) => () => {
     const target = list.find(item => item.id === id);
     setEditingTodo(target.todo);
     setTargetEditingId(id);
-  }
+  }, [list]);
 
-  const handleClickDelete = (id) => async () => {
+  const handleClickDelete = useCallback((id) => async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       const newList = list.filter(item => item.id !== id);
 
@@ -87,7 +87,7 @@ const TodoPage = () => {
 
       setList([...newList]);
     }
-  }
+  }, [list]);
 
   const handleChangeText = ({ target: { name, value } }) => {
     if (name === "new-input") {
@@ -97,7 +97,7 @@ const TodoPage = () => {
     }
   }
 
-  const handleClickUpdate = (id) => async () => {
+  const handleClickUpdate = useCallback((id) => async () => {
     if (window.confirm('정말 제출하시겠습니까?')) {
       if (!editingTodo) {
         return alert('내용을 입력해주세요');
@@ -125,7 +125,7 @@ const TodoPage = () => {
 
       handleClickEditClear();
     }
-  };
+  }, [list, editingTodo]);
 
   const initRequest = async () => {
     // network request

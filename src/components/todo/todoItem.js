@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const TodoItem = ({
   isEditingMode = false,
   checked,
@@ -34,4 +36,4 @@ const TodoItem = ({
   );
 };
 
-export default TodoItem;
+export default memo(TodoItem);
