@@ -12,6 +12,12 @@ const TodoPage = () => {
   const [editingTodo, setEditingTodo] = useState('');
   const [list, setList] = useState([]);
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  }
+
   const handleSubmit = async () => {
     if (!todo) {
       return alert('내용을 입력해주세요');
@@ -150,7 +156,14 @@ const TodoPage = () => {
   return (
     <Page label="TODO">
       <div>
-        <input placeholder="입력하세요" data-testid="new-todo-input" name="new-input" value={todo} onChange={handleChangeText} />
+        <input
+          placeholder="입력하세요"
+          data-testid="new-todo-input"
+          autoComplete="off"
+          onKeyDown={handleKeyDown}
+          name="new-input"
+          value={todo}
+          onChange={handleChangeText} />
         <button data-testid="new-todo-add-button" onClick={handleSubmit}>추가</button>
       </div>
       {list.map((value) => (

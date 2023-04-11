@@ -18,7 +18,7 @@ const TodoItem = ({
       <li className="item-wrap">
         <label>
           <input type="checkbox" checked={checked} onChange={onChangeIsCompleted} />
-          <input data-testid="modify-input" name="modify-input" value={editingTodo} onChange={onChangeText} />
+          <input autoComplete="off" data-testid="modify-input" name="modify-input" value={editingTodo} onChange={onChangeText} />
         </label>
         <button data-testid="submit-button" onClick={onClickUpdate}>제출</button>
         <button data-testid="cancel-button" onClick={onClickEditClear}>취소</button>

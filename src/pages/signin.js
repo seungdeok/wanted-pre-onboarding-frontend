@@ -25,7 +25,22 @@ const SignInPage = () => {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  }
+
   const handleSubmit = async () => {
+    if (!email) {
+      return alert('이메일을 입력해주세요');
+    } else if (!password) {
+      return alert('비밀번호를 입력해주세요');
+    } else if (!isEmailValidated) {
+      return alert('이메일 형식이 올바르지 않습니다');
+    } else if (!isPasswordValidated) {
+      return alert('비밀번호 형식이 올바르지 않습니다');
+    }
     const {
       data,
       success,
@@ -54,14 +69,18 @@ const SignInPage = () => {
     <Page label="로그인">
       <input
         data-testid="email-input"
+        autoComplete="off"
         value={email}
         onChange={handleChangeText}
+        onKeyDown={handleKeyDown}
         type="email"
         name="email" />
       <input
         data-testid="password-input"
+        autoComplete="off"
         value={password}
         onChange={handleChangeText}
+        onKeyDown={handleKeyDown}
         type="password"
         name="password" />
       <button
