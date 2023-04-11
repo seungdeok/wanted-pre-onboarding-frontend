@@ -1,3 +1,4 @@
+import Page from "components/core/page";
 import { signupApi } from "configs/api/auth";
 import useAuth from "hooks/useAuth";
 import { useState } from "react";
@@ -48,7 +49,7 @@ const SignUpPage = () => {
   useAuth();
 
   return (
-    <div>
+    <Page label="회원가입">
       <input
         data-testid="email-input"
         value={email}
@@ -67,7 +68,7 @@ const SignUpPage = () => {
         onClick={handleSubmit}>
         회원가입
       </button>
-    </div>
+    </Page>
   );
 };
 

@@ -1,3 +1,5 @@
+import Page from "components/core/page";
+import TodoItem from "components/todo/todoItem";
 import { createTodoApi, deleteTodoApi, getTodosApi, updateTodoApi } from "configs/api/todo";
 import useAuth from "hooks/useAuth";
 import { useEffect, useState } from "react";
@@ -144,34 +146,25 @@ const TodoPage = () => {
   }, []);
 
   return (
-    <div>
+    <Page label="TODO">
       <input data-testid="new-todo-input" name="new-input" value={todo} onChange={handleChangeText} />
       <button data-testid="new-todo-add-button" onClick={handleSubmit}>추가</button>
-      {list.map((value) => {
-        if (value.id === targetEditingId) {
-          return (
-            <li key={String(value.id)}>
-              <label>
-                <input type="checkbox" checked={value.isCompleted} onChange={handleChangeIsCompleted(value.id)} />
-                <input data-testid="modify-input" name="modify-input" value={editingTodo} onChange={handleChangeText} />
-              </label>
-              <button data-testid="submit-button" onClick={handleClickUpdate(value.id)}>제출</button>
-              <button data-testid="cancel-button" onClick={handleClickEditClear}>취소</button>
-            </li>
-          )
-        }
-        return (
-          <li key={String(value.id)}>
-            <label>
-              <input type="checkbox" checked={value.isCompleted} onChange={handleChangeIsCompleted(value.id)} />
-              <span>{value.todo}</span>
-            </label>
-            <button data-testid="modify-button" onClick={handleClickEditMode(value.id)}>수정</button>
-            <button data-testid="delete-button" onClick={handleClickDelete(value.id)}>삭제</button>
-          </li>
-        );
-      })}
-    </div>
+      {list.map((value) => (
+        <TodoItem
+          key={String(value.id)}
+          isEditingMode={value.id === targetEditingId}
+          checked={value.isCompleted}
+          todo={value.todo}
+          editingTodo={editingTodo}
+          onChangeIsCompleted={handleChangeIsCompleted(value.id)}
+          onChangeText={handleChangeText}
+          onClickUpdate={handleClickUpdate(value.id)}
+          onClickEditClear={handleClickEditClear}
+          onClickDelete={handleClickDelete(value.id)}
+          onClickEditMode={handleClickEditMode(value.id)}
+        />
+      ))}
+    </Page>
   );
 };
 
