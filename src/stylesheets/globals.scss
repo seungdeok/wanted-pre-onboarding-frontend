@@ -17,7 +17,6 @@ a {
   box-sizing: border-box;
 }
 
-button,
 input,
 textarea {
   background: none;
@@ -30,6 +29,7 @@ textarea {
 }
 
 button {
+  outline: inherit;
   margin: 4px;
   padding: 5px 10px;
   width: max-content;
@@ -43,4 +43,11 @@ button {
   &:hover {
     background-color: #0069d9;
   }
+}
+
+button[disabled=disabled],
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
 }
