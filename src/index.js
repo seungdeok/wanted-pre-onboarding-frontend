@@ -8,6 +8,7 @@ import {
 import SignInPage from 'pages/signin';
 import SignUpPage from 'pages/signup';
 import 'stylesheets/globals.scss';
+import TodoPage from 'pages/todo';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/todo",
-    element: <div>TODO</div>,
+    element: <TodoPage />,
   },
   {
     path: "/signin",
