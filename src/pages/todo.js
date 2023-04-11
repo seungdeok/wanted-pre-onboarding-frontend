@@ -149,8 +149,10 @@ const TodoPage = () => {
 
   return (
     <Page label="TODO">
-      <input data-testid="new-todo-input" name="new-input" value={todo} onChange={handleChangeText} />
-      <button data-testid="new-todo-add-button" onClick={handleSubmit}>추가</button>
+      <div>
+        <input placeholder="입력하세요" data-testid="new-todo-input" name="new-input" value={todo} onChange={handleChangeText} />
+        <button data-testid="new-todo-add-button" onClick={handleSubmit}>추가</button>
+      </div>
       {list.map((value) => (
         <TodoItem
           key={String(value.id)}

@@ -1,0 +1,25 @@
+.item-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  label {
+    display: flex;
+    align-items: center;
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+
+    input[name="modify-input"],
+    span {
+      width: 140px;
+    }
+  }
+
+  button {
+    margin-left: 10px;
+  }
+}

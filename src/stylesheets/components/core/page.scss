@@ -1,0 +1,30 @@
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-card-wrap {
+  margin: 100px 0;
+  width: 448px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px;
+  background-color: #F5F6F7;
+  box-shadow: -24px -24px 48px #FFFFFF, 24px 24px 48px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.page-label-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+}

@@ -1,4 +1,5 @@
 import { memo } from "react";
+import 'stylesheets/components/todo/todoItem.scss';
 
 const TodoItem = ({
   isEditingMode = false,
@@ -14,7 +15,7 @@ const TodoItem = ({
 }) => {
   if (isEditingMode) {
     return (
-      <li>
+      <li className="item-wrap">
         <label>
           <input type="checkbox" checked={checked} onChange={onChangeIsCompleted} />
           <input data-testid="modify-input" name="modify-input" value={editingTodo} onChange={onChangeText} />
@@ -25,7 +26,7 @@ const TodoItem = ({
     )
   }
   return (
-    <li>
+    <li className="item-wrap">
       <label>
         <input type="checkbox" checked={checked} onChange={onChangeIsCompleted} />
         <span>{todo}</span>
