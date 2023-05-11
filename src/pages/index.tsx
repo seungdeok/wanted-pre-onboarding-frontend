@@ -1,19 +1,12 @@
 import { Helmet } from '@/components/common/Helmet';
-import { QUERY_KEYS } from '@/constants/queryKeys';
-import { useInfoQuery } from '@/hooks/queries/useInfoQuery';
-import { InfoService } from '@/services/infoService';
 import { HomeView } from '@/views/HomeView';
-import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 export default function Home() {
   const seoMeta = {
     title: 'HOME',
-    description: 'Next Auth Templates',
-    keywords: 'Nextjs, Reactjs, auth',
+    description: '원티드 프리온보딩 프론트엔드 - 선발 과제',
+    keywords: '원티드, 프리온보딩, 프론트엔드, 선발 과제',
   };
-
-  const { isLoading, data } = useInfoQuery({ options: {} });
-
   return (
     <>
       <Helmet
@@ -21,31 +14,7 @@ export default function Home() {
         description={seoMeta.description}
         keywords={seoMeta.keywords}
       />
-      <HomeView isLoading={isLoading} data={data} />
+      <HomeView />
     </>
   );
-}
-
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
-
-  try {
-    await queryClient.prefetchQuery(
-      [QUERY_KEYS.INFO, 'prefetching'],
-      () => InfoService.get(),
-      { staleTime: Infinity },
-    );
-
-    return {
-      props: {
-        dehydratedState: dehydrate(queryClient),
-      },
-    };
-  } catch (e) {
-    return {
-      notFound: true,
-    };
-  } finally {
-    queryClient.clear();
-  }
 }
