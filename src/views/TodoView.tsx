@@ -1,9 +1,11 @@
-import { Layout } from '@/components/common/Layout';
+import { TodoLayout } from '@/components/todo/Layout';
+import { TodoForm } from '@/components/todo/TodoForm';
 
 export const TodoView = () => {
   return (
-    <Layout>
+    <TodoLayout>
       <h1>TODO</h1>
-    </Layout>
+      <TodoForm />
+    </TodoLayout>
   );
 };
