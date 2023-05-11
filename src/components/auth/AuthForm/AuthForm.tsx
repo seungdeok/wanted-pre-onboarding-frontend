@@ -1,35 +1,37 @@
-import { LoadingButton } from '@/components/common/LoadingButton';
-import { AuthTextInput } from '../TextInput';
 import { css } from '@emotion/react';
-import { COLORS } from '@/styles/theme';
-import { useInput } from '@/hooks/useInput';
-import { validateEmail, validatePassword } from '@/utils/validator';
-import { useState } from 'react';
 
-const INITIAL_TEXT = '';
+import { LoadingButton } from '@/components/common/LoadingButton';
+import { AuthTextInput } from '@/components/auth/TextInput';
+import { COLORS } from '@/styles/theme';
+import { ChangeEvent, FocusEvent } from 'react';
 
 interface Props {
+  isLoading: boolean;
   formType: 'signin' | 'signup';
-  onSubmit: (email: string, password: string) => void;
+  onSubmit: () => void;
+  email: string;
+  emailErrorMsg: string;
+  onChangeEmail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlurEmail: (event: FocusEvent<HTMLInputElement, Element>) => void;
+  password: string;
+  passwordErrorMsg: string;
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlurPassword: (event: FocusEvent<HTMLInputElement, Element>) => void;
 }
 
-export const AuthForm = ({ formType, onSubmit }: Props) => {
-  const [email, emailErrorMsg, onChangeEmail, onBlurEmail] = useInput(
-    INITIAL_TEXT,
-    validateEmail,
-  );
-  const [password, passwordErrorMsg, onChangePassword, onBlurPassword] =
-    useInput(INITIAL_TEXT, validatePassword);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const handleSubmit = () => {
-    if (email && password) {
-      setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 2000);
-      onSubmit(email, password);
-    }
-  };
-
+export const AuthForm = ({
+  isLoading,
+  formType,
+  onSubmit,
+  email,
+  emailErrorMsg,
+  onChangeEmail,
+  onBlurEmail,
+  password,
+  passwordErrorMsg,
+  onChangePassword,
+  onBlurPassword,
+}: Props) => {
   return (
     <div>
       <AuthTextInput
@@ -55,7 +57,7 @@ export const AuthForm = ({ formType, onSubmit }: Props) => {
         <LoadingButton
           dataTestId="signup-button"
           isLoading={isLoading}
-          onClick={handleSubmit}
+          onClick={onSubmit}
           disabled={!(!emailErrorMsg && !passwordErrorMsg)}
         >
           <div css={submitBtn}>

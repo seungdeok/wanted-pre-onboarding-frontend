@@ -3,15 +3,36 @@ import { AuthLayout } from '@/components/auth/Layout';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';
+import { useInput } from '@/hooks/useInput';
+import { AuthService } from '@/services/authService';
 import { COLORS } from '@/styles/theme';
+import { validateEmail, validatePassword } from '@/utils/validator';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
+const INITIAL_TEXT = '';
 export const SignupView = () => {
+  const [email, emailErrorMsg, onChangeEmail, onBlurEmail] = useInput(
+    INITIAL_TEXT,
+    validateEmail,
+  );
+  const [password, passwordErrorMsg, onChangePassword, onBlurPassword] =
+    useInput(INITIAL_TEXT, validatePassword);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
-  const handleSubmit = (email: string, password: string) => {
-    console.log(email, password);
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    const data = await AuthService.signup({ email, password });
+    if (data.message) {
+      setIsLoading(false);
+      return alert(data.message);
+    }
+
     alert('회원가입되었습니다');
     router.push(ROUTE_PATH.SIGNIN);
   };
@@ -22,7 +43,19 @@ export const SignupView = () => {
     <AuthLayout>
       <h1 css={title}>회원가입</h1>
       <div css={formWrap}>
-        <AuthForm formType="signin" onSubmit={handleSubmit} />
+        <AuthForm
+          isLoading={isLoading}
+          formType="signup"
+          onSubmit={handleSubmit}
+          email={email}
+          emailErrorMsg={emailErrorMsg}
+          onChangeEmail={onChangeEmail}
+          onBlurEmail={onBlurEmail}
+          password={password}
+          passwordErrorMsg={passwordErrorMsg}
+          onChangePassword={onChangePassword}
+          onBlurPassword={onBlurPassword}
+        />
       </div>
       <div css={linkWrap}>
         이미 계정이 있으신가요?

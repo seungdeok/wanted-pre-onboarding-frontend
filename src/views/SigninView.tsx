@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
@@ -5,14 +6,34 @@ import { AuthLayout } from '@/components/auth/Layout';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
-import { COLORS } from '@/styles/theme';
 import { useAuth } from '@/hooks/useAuth';
+import { AuthService } from '@/services/authService';
+import { validateEmail, validatePassword } from '@/utils/validator';
+import { useInput } from '@/hooks/useInput';
+import { COLORS } from '@/styles/theme';
 
+const INITIAL_TEXT = '';
 export const SigninView = () => {
+  const [email, emailErrorMsg, onChangeEmail, onBlurEmail] = useInput(
+    INITIAL_TEXT,
+    validateEmail,
+  );
+  const [password, passwordErrorMsg, onChangePassword, onBlurPassword] =
+    useInput(INITIAL_TEXT, validatePassword);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
-  const handleSubmit = (email: string, password: string) => {
-    console.log(email, password);
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    const data = await AuthService.signin({ email, password });
+    if (data.error) {
+      setIsLoading(false);
+      return alert(data.message);
+    }
+
     router.push(ROUTE_PATH.TODO);
   };
 
@@ -22,7 +43,19 @@ export const SigninView = () => {
     <AuthLayout>
       <h1 css={title}>로그인</h1>
       <div css={formWrap}>
-        <AuthForm formType="signin" onSubmit={handleSubmit} />
+        <AuthForm
+          isLoading={isLoading}
+          formType="signin"
+          onSubmit={handleSubmit}
+          email={email}
+          emailErrorMsg={emailErrorMsg}
+          onChangeEmail={onChangeEmail}
+          onBlurEmail={onBlurEmail}
+          password={password}
+          passwordErrorMsg={passwordErrorMsg}
+          onChangePassword={onChangePassword}
+          onBlurPassword={onBlurPassword}
+        />
       </div>
       <div css={linkWrap}>
         계정이 없으신가요?
