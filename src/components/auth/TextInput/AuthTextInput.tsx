@@ -7,18 +7,20 @@ interface Props extends HTMLProps<HTMLInputElement> {
   type?: string;
   label: string;
   errorMsg: string;
+  dataTestId: string;
 }
 
 export const AuthTextInput = ({
   type = 'text',
   label = '',
   errorMsg = '',
+  dataTestId,
   ...restProps
 }: Props) => {
   return (
     <div css={inputWrap}>
       <label>{label}</label>
-      <TextInput type={type} {...restProps} />
+      <TextInput dataTestId={dataTestId} type={type} {...restProps} />
       {errorMsg.length ? <div css={errorWrap}>{errorMsg}</div> : null}
     </div>
   );

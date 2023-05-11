@@ -1,16 +1,20 @@
 import { AuthLayout } from '@/components/auth/Layout';
-import { SigninForm } from '@/components/auth/SigninForm';
+import { AuthForm } from '@/components/auth/AuthForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { COLORS } from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const SigninView = () => {
+  const handleSubmit = (email: string, password: string) => {
+    console.log(email, password);
+  };
+
   return (
     <AuthLayout>
       <h1 css={title}>로그인</h1>
       <div css={formWrap}>
-        <SigninForm />
+        <AuthForm formType="signin" onSubmit={handleSubmit} />
       </div>
       <div css={linkWrap}>
         계정이 없으신가요?

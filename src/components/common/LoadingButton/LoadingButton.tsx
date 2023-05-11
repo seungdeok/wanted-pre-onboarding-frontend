@@ -3,21 +3,25 @@ import { css, keyframes } from '@emotion/react';
 import { ReactNode } from 'react';
 
 interface Props {
+  dataTestId: string;
   isLoading?: boolean;
-  disabled?: boolean;
+  disabled: boolean;
   children: ReactNode;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 const MIN_TOUCH_SIZE = 44;
 
 export const LoadingButton = ({
+  dataTestId,
   isLoading,
   disabled,
   children,
   onClick,
 }: Props) => {
+  console.log(disabled);
   return (
     <button
+      data-testId={dataTestId}
       css={css`
         ${touchWrap};
         opacity: ${disabled || isLoading ? 0.75 : 1};

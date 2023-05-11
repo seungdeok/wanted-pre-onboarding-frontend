@@ -3,33 +3,37 @@ import { AuthTextInput } from '../TextInput';
 import { css } from '@emotion/react';
 import { COLORS } from '@/styles/theme';
 import { useInput } from '@/hooks/useInput';
-import {
-  validateEmail,
-  validatePassword,
-  validateName,
-} from '@/utils/validator';
+import { validateEmail, validatePassword } from '@/utils/validator';
+import { useState } from 'react';
 
 const INITIAL_TEXT = '';
 
-export const SignupForm = () => {
+interface Props {
+  formType: 'signin' | 'signup';
+  onSubmit: (email: string, password: string) => void;
+}
+
+export const AuthForm = ({ formType, onSubmit }: Props) => {
   const [email, emailErrorMsg, onChangeEmail, onBlurEmail] = useInput(
     INITIAL_TEXT,
     validateEmail,
   );
   const [password, passwordErrorMsg, onChangePassword, onBlurPassword] =
     useInput(INITIAL_TEXT, validatePassword);
-  const [name, nameErrorMsg, onChangeName, onBlurName] = useInput(
-    INITIAL_TEXT,
-    validateName,
-  );
 
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = () => {
-    console.log('login');
+    if (email && password) {
+      setIsLoading(true);
+      setTimeout(() => setIsLoading(false), 2000);
+      onSubmit(email, password);
+    }
   };
 
   return (
     <div>
       <AuthTextInput
+        dataTestId="email-input"
         label="이메일"
         value={email}
         errorMsg={emailErrorMsg}
@@ -38,6 +42,7 @@ export const SignupForm = () => {
       />
       <div css={inputWrap}>
         <AuthTextInput
+          dataTestId="password-input"
           label="비밀번호"
           type="password"
           value={password}
@@ -46,18 +51,16 @@ export const SignupForm = () => {
           onBlur={onBlurPassword}
         />
       </div>
-      <div css={inputWrap}>
-        <AuthTextInput
-          label="이름"
-          value={name}
-          errorMsg={nameErrorMsg}
-          onChange={onChangeName}
-          onBlur={onBlurName}
-        />
-      </div>
       <div css={btnWrap}>
-        <LoadingButton isLoading={false} onClick={handleSubmit}>
-          <div css={submitBtn}>로그인</div>
+        <LoadingButton
+          dataTestId="signup-button"
+          isLoading={isLoading}
+          onClick={handleSubmit}
+          disabled={!(!emailErrorMsg && !passwordErrorMsg)}
+        >
+          <div css={submitBtn}>
+            {formType === 'signin' ? '로그인' : '회원가입'}
+          </div>
         </LoadingButton>
       </div>
     </div>

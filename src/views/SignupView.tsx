@@ -1,16 +1,20 @@
+import { AuthForm } from '@/components/auth/AuthForm';
 import { AuthLayout } from '@/components/auth/Layout';
-import { SignupForm } from '@/components/auth/SignupForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { COLORS } from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const SignupView = () => {
+  const handleSubmit = (email: string, password: string) => {
+    console.log(email, password);
+  };
+
   return (
     <AuthLayout>
       <h1 css={title}>회원가입</h1>
       <div css={formWrap}>
-        <SignupForm />
+        <AuthForm formType="signin" onSubmit={handleSubmit} />
       </div>
       <div css={linkWrap}>
         이미 계정이 있으신가요?

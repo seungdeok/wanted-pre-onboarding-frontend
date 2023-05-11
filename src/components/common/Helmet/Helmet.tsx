@@ -12,6 +12,8 @@ interface Props {
   ogImageUrl?: string;
 }
 
+const TITLE_PREFIX = '원티드 프리온보딩 프론트엔드';
+
 export const Helmet = ({
   title = 'Next Templates',
   canonicalUrl = '',
@@ -25,7 +27,7 @@ export const Helmet = ({
 }: Props) => {
   return (
     <Head>
-      <title>{title}</title>
+      <title>{`${TITLE_PREFIX} | ${title}`}</title>
       <meta name="canonical" content={canonicalUrl} />
       {description !== undefined && (
         <meta name="description" content={description} />

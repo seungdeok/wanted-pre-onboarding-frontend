@@ -1,7 +1,7 @@
 export const ROUTE_PATH = {
   HOME: '/',
-  SIGNIN: '/accounts/signin',
-  SIGNUP: '/accounts/signup',
+  SIGNIN: '/signin',
+  SIGNUP: '/signup',
   MYPAGE: '/users',
 } as const;
 
