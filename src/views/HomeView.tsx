@@ -1,18 +1,18 @@
 import { Layout } from '@/components/common/Layout';
-import { useAuth } from '@/hooks/useAuth';
-import { ReturnType } from '@/services/infoService';
+import { ROUTE_PATH } from '@/constants/routes';
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
+import { useRouter } from 'next/router';
 
-interface Props {
-  isLoading: boolean;
-  data: ReturnType | undefined;
-}
+export const HomeView = () => {
+  const router = useRouter();
 
-export const HomeView = ({ isLoading, data }: Props) => {
-  const [isLoggedIn] = useAuth();
+  useIsomorphicLayoutEffect(() => {
+    router.replace(ROUTE_PATH.TODO);
+  }, []);
+
   return (
-    <Layout isLoggedIn={isLoggedIn}>
+    <Layout>
       <h1>Next Templates</h1>
-      {isLoading ? <div>loading...</div> : <div>{data?.name}</div>}
     </Layout>
   );
 };

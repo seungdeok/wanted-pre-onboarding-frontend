@@ -2,6 +2,7 @@ import { AuthForm } from '@/components/auth/AuthForm';
 import { AuthLayout } from '@/components/auth/Layout';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
+import { useAuth } from '@/hooks/useAuth';
 import { COLORS } from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
@@ -14,6 +15,8 @@ export const SignupView = () => {
     alert('회원가입되었습니다');
     router.push(ROUTE_PATH.SIGNIN);
   };
+
+  useAuth();
 
   return (
     <AuthLayout>

@@ -6,6 +6,7 @@ import { AuthForm } from '@/components/auth/AuthForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { COLORS } from '@/styles/theme';
+import { useAuth } from '@/hooks/useAuth';
 
 export const SigninView = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ export const SigninView = () => {
     console.log(email, password);
     router.push(ROUTE_PATH.TODO);
   };
+
+  useAuth();
 
   return (
     <AuthLayout>

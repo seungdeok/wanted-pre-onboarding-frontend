@@ -21,7 +21,7 @@ export const LoadingButton = ({
   console.log(disabled);
   return (
     <button
-      data-testId={dataTestId}
+      data-testid={dataTestId}
       css={css`
         ${touchWrap};
         opacity: ${disabled || isLoading ? 0.75 : 1};
