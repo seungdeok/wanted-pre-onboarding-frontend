@@ -1,13 +1,13 @@
 import { Helmet } from '@/components/common/Helmet';
 import { SSR_STALE_TIME } from '@/constants/queryKeys';
-import { UsersView } from '@/views/UsersView';
+import { TodoView } from '@/views/TodoView';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-export default function UserPage() {
+export default function TodoPage() {
   const seoMeta = {
-    title: 'LOGIN',
-    description: 'Next Auth Templates',
-    keywords: 'Nextjs, Reactjs, auth',
+    title: 'TODO',
+    description: '원티드 프리온보딩 프론트엔드 - 선발 과제',
+    keywords: '원티드, 프리온보딩, 프론트엔드, 선발 과제',
   };
 
   // const { isLoading, data } = useInfoQuery({ options: {} });
@@ -19,7 +19,7 @@ export default function UserPage() {
         description={seoMeta.description}
         keywords={seoMeta.keywords}
       />
-      <UsersView isLoggedIn={true} />
+      <TodoView />
     </>
   );
 }

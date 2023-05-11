@@ -1,13 +1,18 @@
+import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+
 import { AuthLayout } from '@/components/auth/Layout';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { COLORS } from '@/styles/theme';
-import { css } from '@emotion/react';
 
 export const SigninView = () => {
+  const router = useRouter();
+
   const handleSubmit = (email: string, password: string) => {
     console.log(email, password);
+    router.push(ROUTE_PATH.TODO);
   };
 
   return (

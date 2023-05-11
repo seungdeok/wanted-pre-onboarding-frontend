@@ -4,10 +4,15 @@ import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { COLORS } from '@/styles/theme';
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 
 export const SignupView = () => {
+  const router = useRouter();
+
   const handleSubmit = (email: string, password: string) => {
     console.log(email, password);
+    alert('회원가입되었습니다');
+    router.push(ROUTE_PATH.SIGNIN);
   };
 
   return (

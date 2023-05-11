@@ -4,8 +4,8 @@ import { SignupView } from '@/views/SignupView';
 export default function SignupPage() {
   const seoMeta = {
     title: 'SINGUP',
-    description: 'Next Auth Templates',
-    keywords: 'Nextjs, Reactjs, auth',
+    description: '원티드 프리온보딩 프론트엔드 - 선발 과제',
+    keywords: '원티드, 프리온보딩, 프론트엔드, 선발 과제',
   };
   return (
     <>
