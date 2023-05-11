@@ -1,3 +1,6 @@
+import { STORAGE_KEYS } from '@/constants/storageKeys';
+import { StorageService } from './storageService';
+
 interface RequestOptions {
   url: string;
   body?: object;
@@ -19,11 +22,13 @@ const request = async (
   body?: object,
   headers: object = {},
 ) => {
+  const accessToken = StorageService.get(STORAGE_KEYS.token);
   const options = {
     method,
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
+      Authorization: `Bearer ${accessToken}`,
       ...headers,
     },
     ...(body && { body: JSON.stringify(body) }),
@@ -38,7 +43,7 @@ const request = async (
     const data = await res.json();
     return {
       statusCode: res.status,
-      ...data,
+      data,
     };
   }
 

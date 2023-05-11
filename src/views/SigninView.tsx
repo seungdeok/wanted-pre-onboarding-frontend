@@ -26,12 +26,13 @@ export const SigninView = () => {
   const router = useRouter();
 
   const handleSubmit = async () => {
+    if (!email || !password) return;
     setIsLoading(true);
 
     const data = await AuthService.signin({ email, password });
-    if (data.error) {
+    if (data.data.message) {
       setIsLoading(false);
-      return alert(data.message);
+      return alert(data.data.message);
     }
 
     router.push(ROUTE_PATH.TODO);

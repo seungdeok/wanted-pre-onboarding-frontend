@@ -1,9 +1,8 @@
 import { API_PATH, API_URL, BASE_URL } from '@/constants/api';
 import { IClient, client } from '@/services/client';
-
 export interface ITodo {
   id: number;
-  name: string;
+  todo: string;
   isCompleted: boolean;
   userId: number;
 }
@@ -17,7 +16,7 @@ class TodoAPI {
     this.apiPath = apiPath;
   }
 
-  async createTodo({ todo }: { todo: string }): Promise<ITodo> {
+  createTodo = async ({ todo }: { todo: string }): Promise<ITodo> => {
     const data = await this.instance.post({
       url: this.apiPath,
       body: {
@@ -25,16 +24,16 @@ class TodoAPI {
       },
     });
     return data;
-  }
+  };
 
-  async getTodos(): Promise<ITodo[]> {
+  getTodos = async (): Promise<ITodo[]> => {
     const data = await this.instance.get({
       url: this.apiPath,
     });
     return data;
-  }
+  };
 
-  async updateTodo({
+  updateTodo = async ({
     id,
     todo,
     isCompleted,
@@ -42,7 +41,7 @@ class TodoAPI {
     id: string;
     todo: string;
     isCompleted: boolean;
-  }): Promise<ITodo> {
+  }): Promise<ITodo> => {
     const data = await this.instance.post({
       url: this.apiPath + `/${id}`,
       body: {
@@ -51,16 +50,15 @@ class TodoAPI {
       },
     });
     return data;
-  }
+  };
 
-  async deleteTodo({ id }: { id: string }): Promise<void> {
+  deleteTodo = async ({ id }: { id: string }): Promise<void> => {
     const data = await this.instance.post({
       url: this.apiPath + `/${id}`,
       body: {},
-      headers: {},
     });
     return data;
-  }
+  };
 }
 
 const TodoService = new TodoAPI(client, `${BASE_URL}${API_PATH.todos}`);

@@ -25,12 +25,13 @@ export const SignupView = () => {
   const router = useRouter();
 
   const handleSubmit = async () => {
+    if (!email || !password) return;
     setIsLoading(true);
 
     const data = await AuthService.signup({ email, password });
-    if (data.message) {
+    if (data.data.message) {
       setIsLoading(false);
-      return alert(data.message);
+      return alert(data.data.message);
     }
 
     alert('회원가입되었습니다');

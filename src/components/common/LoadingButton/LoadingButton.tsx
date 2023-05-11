@@ -18,7 +18,6 @@ export const LoadingButton = ({
   children,
   onClick,
 }: Props) => {
-  console.log(disabled);
   return (
     <button
       data-testid={dataTestId}

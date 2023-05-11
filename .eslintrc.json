@@ -11,7 +11,7 @@
     "plugin:prettier/recommended",
     "next/core-web-vitals"
   ],
-  "ignorePatterns": ["jest.config.js", "jest.setup.js"],
+  "ignorePatterns": ["jest.config.js", "jest.setup.js", "next.config.js"],
   "rules": {
     "react/react-in-jsx-scope": "off", // allow without 'React'
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }] // allow including ts & tsx

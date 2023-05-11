@@ -1,12 +1,10 @@
 import { API_PATH, API_URL, BASE_URL } from '@/constants/api';
 import { IClient, client } from '@/services/client';
-import { StorageService } from './storageService';
+import { StorageService } from '@/services/storageService';
 import { STORAGE_KEYS } from '@/constants/storageKeys';
 
 export interface IAuth {
-  access_token: string;
-  error?: string;
-  message?: string;
+  data: { access_token: string; error?: string; message?: string };
   statusCode: number;
 }
 
@@ -51,7 +49,7 @@ class AuthAPI {
       },
     });
 
-    if (data.access_token) {
+    if (data.data.access_token) {
       StorageService.set(STORAGE_KEYS.token, data.access_token);
 
       return data;

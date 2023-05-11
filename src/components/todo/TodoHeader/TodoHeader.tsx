@@ -44,6 +44,7 @@ const headerWrap = css`
     width: 100%;
     border: none;
     height: 100%;
+    padding: 0;
   }
 
   button {

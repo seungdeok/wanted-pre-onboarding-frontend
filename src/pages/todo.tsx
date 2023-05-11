@@ -1,5 +1,6 @@
 import { Helmet } from '@/components/common/Helmet';
-import { SSR_STALE_TIME } from '@/constants/queryKeys';
+import { QUERY_KEYS, SSR_STALE_TIME } from '@/constants/queryKeys';
+import { TodoService } from '@/services/todoService';
 import { TodoView } from '@/views/TodoView';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
@@ -9,8 +10,6 @@ export default function TodoPage() {
     description: '원티드 프리온보딩 프론트엔드 - 선발 과제',
     keywords: '원티드, 프리온보딩, 프론트엔드, 선발 과제',
   };
-
-  // const { isLoading, data } = useInfoQuery({ options: {} });
 
   return (
     <>
@@ -34,9 +33,10 @@ const queryClient = new QueryClient({
 
 export async function getServerSideProps() {
   try {
-    // await queryClient.prefetchQuery([QUERY_KEYS.INFO, 'prefetching'], () =>
-    //   InfoService.get(),
-    // );
+    await queryClient.prefetchQuery(
+      [QUERY_KEYS.todo, 'prefetch'],
+      TodoService.getTodos,
+    );
 
     return {
       props: {

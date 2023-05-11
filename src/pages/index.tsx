@@ -18,3 +18,25 @@ export default function Home() {
     </>
   );
 }
+
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient({});
+//   try {
+//    await queryClient.prefetchQuery(
+//      [QUERY_KEYS.INFO, 'prefetching'],
+//      () => InfoService.get(),
+//      { staleTime: Infinity },
+//    );
+//     return {
+//       props: {
+//         dehydratedState: dehydrate(queryClient),
+//       },
+//     };
+//   } catch (e) {
+//     return {
+//       props: {},
+//     };
+//   } finally {
+//     queryClient.clear();
+//   }
+// }
