@@ -1,5 +1,5 @@
 import { STORAGE_KEYS } from '@/constants/storageKeys';
-import { StorageService } from './storageService';
+import { AuthService } from './authService';
 
 interface RequestOptions {
   url: string;
@@ -22,7 +22,7 @@ const request = async (
   body?: object,
   headers: object = {},
 ) => {
-  const accessToken = StorageService.get(STORAGE_KEYS.token);
+  const accessToken = AuthService.getToken();
   const options = {
     method,
     headers: {
