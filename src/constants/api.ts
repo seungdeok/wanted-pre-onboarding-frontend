@@ -1,11 +1,13 @@
-export const BASE_URL = 'http://localhost:3000/api';
+export const BASE_URL = 'https://www.pre-onboarding-selection-task.shop';
 
 export const API_PATH = {
-  INFO: '/info',
+  auth: '/auth',
+  todos: '/todos',
 } as const;
 
 export const API_URL = {
-  INFO: BASE_URL + API_PATH.INFO,
+  auth: BASE_URL + API_PATH.auth,
+  todos: BASE_URL + API_PATH.todos,
 } as const;
 
 export type API_PATH = (typeof API_PATH)[keyof typeof API_PATH];
