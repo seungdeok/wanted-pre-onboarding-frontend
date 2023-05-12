@@ -19,7 +19,7 @@ export const TodoList = ({ isLoading, data }: Props) => {
   return (
     <ul>
       {data.data.map((item: ITodo) => {
-        return <TodoItem key={item.id} id={item.id} name={item.todo} />;
+        return <TodoItem key={item.id} id={item.id} todo={item.todo} />;
       })}
     </ul>
   );

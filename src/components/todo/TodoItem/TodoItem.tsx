@@ -1,14 +1,18 @@
 import { COLORS } from '@/styles/theme';
-import { ITodo } from '@/types/todo';
 import { css } from '@emotion/react';
 
-export const TodoItem = ({ id, name }: ITodo) => {
+interface Props {
+  id: number;
+  todo: string;
+}
+
+export const TodoItem = ({ id, todo }: Props) => {
   return (
     <li css={itemWrap}>
       <label>
         <input type="checkbox" />
         <span>
-          {id}_{name}
+          {id}_{todo}
         </span>
       </label>
       <div css={btnWrap}>
