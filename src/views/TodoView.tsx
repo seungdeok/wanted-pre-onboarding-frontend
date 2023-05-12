@@ -8,7 +8,7 @@ export const TodoView = () => {
 
   useAuth();
   return (
-    <TodoLayout>
+    <TodoLayout isLoggedIn={true}>
       <h1>TODO</h1>
       <TodoForm isLoading={isLoading} data={data} refetch={refetch} />
     </TodoLayout>

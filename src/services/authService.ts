@@ -24,6 +24,11 @@ class AuthAPI {
     this.storage = storage;
   }
 
+  isLoggedIn = () => {
+    if (!this.storage) return false;
+    return this.storage.getItem(STORAGE_KEYS.token) !== '';
+  };
+
   getToken = () => {
     if (!this.storage) return null;
     return this.storage.getItem(STORAGE_KEYS.token);
@@ -74,7 +79,7 @@ class AuthAPI {
 
   signout = () => {
     if (!this.storage) return null;
-    return this.storage.remove(STORAGE_KEYS.token);
+    return this.storage.removeItem(STORAGE_KEYS.token);
   };
 }
 

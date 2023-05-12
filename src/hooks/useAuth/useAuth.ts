@@ -1,14 +1,14 @@
 import { ROUTE_PATH } from '@/constants/routes';
+import { AuthService } from '@/services/authService';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const STORAGE_TOKEN_KEY = 'token';
 export const useAuth = () => {
   const router = useRouter();
 
   useEffect(() => {
     const checkAuth = () => {
-      const isLoggedIn = Boolean(localStorage.getItem(STORAGE_TOKEN_KEY));
+      const isLoggedIn = Boolean(AuthService.getToken());
       const isAuthPath =
         router.asPath.includes(ROUTE_PATH.SIGNIN) ||
         router.asPath.includes(ROUTE_PATH.SIGNUP);

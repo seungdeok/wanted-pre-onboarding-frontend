@@ -1,5 +1,5 @@
-import { STORAGE_KEYS } from '@/constants/storageKeys';
-import { AuthService } from './authService';
+import { isClient } from '@/utils/isClient';
+// import { AuthService } from '@/services/authService';
 
 interface RequestOptions {
   url: string;
@@ -22,13 +22,11 @@ const request = async (
   body?: object,
   headers: object = {},
 ) => {
-  const accessToken = AuthService.getToken();
   const options = {
     method,
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${accessToken}`,
       ...headers,
     },
     ...(body && { body: JSON.stringify(body) }),

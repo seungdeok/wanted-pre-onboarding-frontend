@@ -2,6 +2,9 @@ import { css } from '@emotion/react';
 import { HyperLink, Args as HyperLinkArgs } from '../HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { DEVICE_SIZES } from '@/styles/theme';
+import { usePopup } from '@/hooks/usePopup';
+import { useRouter } from 'next/router';
+import { AuthService } from '@/services/authService';
 
 interface Props {
   isLoggedIn: boolean;
@@ -10,17 +13,23 @@ interface Props {
 export const HEADER_HEIGHT = 52;
 
 export const Header = ({ isLoggedIn }: Props) => {
-  const itemList = [
-    isLoggedIn
-      ? {
-          label: '로그아웃',
-          redirectPath: ROUTE_PATH.SIGNIN,
-        }
-      : {
-          label: '로그인',
-          redirectPath: ROUTE_PATH.SIGNIN,
-        },
-  ];
+  const router = useRouter();
+  const { open, close } = usePopup();
+  // const itemList = [
+  //   {
+  //     label: '메뉴',
+  //     redirectPath: ROUTE_PATH.HOME,
+  //   }
+  // ];
+
+  const handleLogout = () => {
+    const onApprove = () => {
+      AuthService.signout();
+      router.push(ROUTE_PATH.SIGNIN);
+      close();
+    };
+    open('confirm', '로그아웃 하시겠습니까?', onApprove);
+  };
 
   return (
     <header css={headerWrap}>
@@ -30,7 +39,7 @@ export const Header = ({ isLoggedIn }: Props) => {
         </HyperLink>
         <nav>
           <ul>
-            {itemList.map((item: HyperLinkArgs) => {
+            {/* {itemList.map((item: HyperLinkArgs) => {
               return (
                 <li key={item.redirectPath}>
                   <HyperLink redirectPath={item.redirectPath}>
@@ -38,7 +47,16 @@ export const Header = ({ isLoggedIn }: Props) => {
                   </HyperLink>
                 </li>
               );
-            })}
+            })} */}
+            <li>
+              {isLoggedIn ? (
+                <button css={touchArea} onClick={handleLogout} type="button">
+                  로그아웃
+                </button>
+              ) : (
+                <HyperLink redirectPath={ROUTE_PATH.SIGNIN}>로그인</HyperLink>
+              )}
+            </li>
           </ul>
         </nav>
       </div>
@@ -67,8 +85,11 @@ const headerContentWrap = css`
   padding: 0 16px;
 `;
 
-const logoWrap = css``;
-
-const itemListWrap = css``;
-
-const itemWrap = css``;
+const touchArea = css`
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;

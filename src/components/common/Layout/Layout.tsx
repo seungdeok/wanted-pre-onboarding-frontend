@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Header, HEADER_HEIGHT } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { COLORS, DEVICE_SIZES } from '@/styles/theme';
+import { Popup } from '@/components/common/Popup';
 
 interface Props {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface Props {
 export const Layout = ({ children, isLoggedIn = false }: Props) => {
   return (
     <>
+      <Popup />
       <Header isLoggedIn={isLoggedIn} />
       <main css={layoutWrap}>
         <section css={layoutContentWrap}>{children}</section>

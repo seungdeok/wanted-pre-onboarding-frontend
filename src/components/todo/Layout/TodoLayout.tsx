@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 import { Layout } from '@/components/common/Layout';
-import { COLORS } from '@/styles/theme';
 
 interface Props {
+  isLoggedIn: boolean;
   children: ReactNode;
 }
 
-export const TodoLayout = ({ children }: Props) => {
+export const TodoLayout = ({ isLoggedIn, children }: Props) => {
   return (
-    <Layout>
+    <Layout isLoggedIn={isLoggedIn}>
       <section css={layoutWrap}>
         <div css={cardWrap}>{children}</div>
       </section>

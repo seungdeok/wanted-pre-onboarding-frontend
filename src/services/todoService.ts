@@ -1,5 +1,6 @@
 import { API_PATH, API_URL, BASE_URL } from '@/constants/api';
 import { IClient, client } from '@/services/client';
+import { AuthService } from './authService';
 export interface ITodo {
   id: number;
   todo: string;
@@ -17,18 +18,26 @@ class TodoAPI {
   }
 
   createTodo = async ({ todo }: { todo: string }): Promise<ITodo> => {
+    const accessToken = AuthService.getToken();
     const data = await this.instance.post({
       url: this.apiPath,
       body: {
         todo,
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;
   };
 
   getTodos = async (): Promise<ITodo[]> => {
+    const accessToken = AuthService.getToken();
     const data = await this.instance.get({
       url: this.apiPath,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     return data;
   };
@@ -42,20 +51,28 @@ class TodoAPI {
     todo: string;
     isCompleted: boolean;
   }): Promise<ITodo> => {
+    const accessToken = AuthService.getToken();
     const data = await this.instance.post({
       url: this.apiPath + `/${id}`,
       body: {
         todo,
         isCompleted,
       },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     return data;
   };
 
   deleteTodo = async ({ id }: { id: string }): Promise<void> => {
+    const accessToken = AuthService.getToken();
     const data = await this.instance.post({
       url: this.apiPath + `/${id}`,
       body: {},
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     return data;
   };
