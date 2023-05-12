@@ -1,6 +1,6 @@
 import { API_PATH, API_URL, BASE_URL } from '@/constants/api';
 import { IClient, client } from '@/services/client';
-import { AuthService } from './authService';
+import { AuthService } from '@/services/authService';
 export interface ITodo {
   id: number;
   todo: string;

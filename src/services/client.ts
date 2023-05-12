@@ -1,6 +1,3 @@
-import { isClient } from '@/utils/isClient';
-// import { AuthService } from '@/services/authService';
-
 interface RequestOptions {
   url: string;
   body?: object;
