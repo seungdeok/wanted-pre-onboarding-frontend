@@ -1,5 +1,5 @@
 import { ROUTE_PATH } from '@/constants/routes';
-import { AuthService } from '@/services/authService';
+import { AuthService } from '@/services/AuthService';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

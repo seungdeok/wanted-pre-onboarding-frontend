@@ -1,4 +1,4 @@
-import { validateEmail } from './validateEmail';
+import { EMAIL_ERROR_MSG, validateEmail } from './validateEmail';
 
 describe('[unit] validateName', () => {
   it('Return success true when email is valid', () => {
@@ -12,13 +12,13 @@ describe('[unit] validateName', () => {
     const email = 'validemail.com';
     const result = validateEmail(email);
     expect(result.success).toBe(false);
-    expect(result.msg).toBe('올바른 이메일 형식이 아닙니다');
+    expect(result.msg).toBe(EMAIL_ERROR_MSG.invalid);
   });
 
   it('Return success true when name is empty', () => {
     const email = '';
     const result = validateEmail(email);
-    expect(result.success).toBe(true);
-    expect(result.msg).toBeUndefined();
+    expect(result.success).toBe(false);
+    expect(result.msg).toBe(EMAIL_ERROR_MSG.empty);
   });
 });

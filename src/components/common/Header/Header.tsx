@@ -4,7 +4,7 @@ import { ROUTE_PATH } from '@/constants/routes';
 import { DEVICE_SIZES } from '@/styles/theme';
 import { usePopup } from '@/hooks/usePopup';
 import { useRouter } from 'next/router';
-import { AuthService } from '@/services/authService';
+import { AuthService } from '@/services/AuthService';
 
 interface Props {
   isLoggedIn: boolean;

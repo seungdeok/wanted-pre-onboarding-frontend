@@ -1,10 +1,10 @@
-import { API_PATH, API_URL, BASE_URL } from '@/constants/api';
+import { API_URL } from '@/constants/api';
 import { IClient, client } from '@/services/client';
 import { STORAGE_KEYS } from '@/constants/storageKeys';
 import { isClient } from '@/utils/isClient';
 
 export interface IAuth {
-  data: { access_token: string; error?: string; message?: string };
+  data: { access_token?: string; error?: string; message?: string };
   statusCode: number;
 }
 
@@ -68,7 +68,7 @@ class AuthAPI {
 
     if (data.data.access_token) {
       if (this.storage) {
-        this.storage.setItem(STORAGE_KEYS.token, data.access_token);
+        this.storage.setItem(STORAGE_KEYS.token, data.data.access_token);
       }
 
       return data;
@@ -85,7 +85,7 @@ class AuthAPI {
 
 const AuthService = new AuthAPI(
   client,
-  `${BASE_URL}${API_PATH.auth}`,
+  API_URL.auth,
   isClient() ? window.localStorage : null,
 );
 

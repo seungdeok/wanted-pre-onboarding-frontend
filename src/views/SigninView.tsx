@@ -7,7 +7,7 @@ import { AuthForm } from '@/components/auth/AuthForm';
 import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';
-import { AuthService } from '@/services/authService';
+import { AuthService } from '@/services/AuthService';
 import { validateEmail, validatePassword } from '@/utils/validator';
 import { useInput } from '@/hooks/useInput';
 import { COLORS } from '@/styles/theme';

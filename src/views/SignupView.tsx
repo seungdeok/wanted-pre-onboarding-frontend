@@ -4,7 +4,7 @@ import { HyperLink } from '@/components/common/HyperLink';
 import { ROUTE_PATH } from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';
 import { useInput } from '@/hooks/useInput';
-import { AuthService } from '@/services/authService';
+import { AuthService } from '@/services/AuthService';
 import { COLORS } from '@/styles/theme';
 import { validateEmail, validatePassword } from '@/utils/validator';
 import { css } from '@emotion/react';

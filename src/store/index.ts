@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { popupReducer } from '@/store/features/popupSlice';
 
+const rootReducer = combineReducers({
+  popup: popupReducer,
+});
+
 export const store = configureStore({
-  reducer: {
-    popup: popupReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false }),
   devTools: process.env.NODE_ENV === 'development',
