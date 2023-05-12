@@ -9,7 +9,6 @@ interface Props {
 }
 
 export const TodoList = ({ isLoading, data }: Props) => {
-  console.log(data);
   if (isLoading) {
     return <div>loading...</div>;
   }
